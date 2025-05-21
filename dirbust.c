@@ -125,7 +125,7 @@ void check_url(const char *base_url, const char *path) {
 	}
 }
 
-void *thread_func(void *arg) {
+int thread_func(void *arg) {
 	char line[MAX_LINE];
 
 	while (1) {
@@ -141,7 +141,7 @@ void *thread_func(void *arg) {
 			check_url(base_url, line);
 		}
 	}
-	return NULL;
+	return thrd_success;
 }
 
 int main(int argc, char *argv[]) {
@@ -165,13 +165,13 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	mtx_init(&file_mutex, NULL);
+	mtx_init(&file_mutex, mtx_plain);
 	curl_global_init(CURL_GLOBAL_ALL);
 
 	thrd_t threads[MAX_THREADS];
 
 	for (int i = 0; i<thread_count; i++) {
-		thrd_create(&threads[i], NULL, thread_func, NULL);
+		thrd_create(&threads[i], thread_func, NULL);
 	}
 
 	for (int i = 0; i<thread_count; i++) {
