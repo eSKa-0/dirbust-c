@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
+#include <threads.h>
 #include <curl/curl.h>
 #include <sys/socket.h>
 #include <netinet/in.h>

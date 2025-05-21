@@ -1,7 +1,7 @@
 #include "dirbust.h"
 
 FILE *wordlist_file;
-pthread_mutex_t file_mutex;
+mtx_t file_mutex;
 const char *base_url = NULL;
 
 size_t discard_callback(void *contents, size_t size, size_t nmemb, void *userp) {
@@ -129,12 +129,12 @@ void *thread_func(void *arg) {
 	char line[MAX_LINE];
 
 	while (1) {
-		pthread_mutex_lock(&file_mutex);
+		mtx_lock(&file_mutex);
 		if (!fgets(line, sizeof(line), wordlist_file)) {
-			pthread_mutex_unlock(&file_mutex);
+			mtx_unlock(&file_mutex);
 			break;
 		}
-		pthread_mutex_unlock(&file_mutex);
+		mtx_unlock(&file_mutex);
 
 		line[strcspn(line, "\r\n")] = 0;
 		if (strlen(line) > 0) {
@@ -165,21 +165,21 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	pthread_mutex_init(&file_mutex, NULL);
+	mtx_init(&file_mutex, NULL);
 	curl_global_init(CURL_GLOBAL_ALL);
 
-	pthread_t threads[MAX_THREADS];
+	thrd_t threads[MAX_THREADS];
 
 	for (int i = 0; i<thread_count; i++) {
-		pthread_create(&threads[i], NULL, thread_func, NULL);
+		thrd_create(&threads[i], NULL, thread_func, NULL);
 	}
 
 	for (int i = 0; i<thread_count; i++) {
-		pthread_join(threads[i], NULL);
+		thrd_join(threads[i], NULL);
 	}
 
 	curl_global_cleanup();
-	pthread_mutex_destroy(&file_mutex);
+	mtx_destroy(&file_mutex);
 	fclose(wordlist_file);
 
 	return 0;
