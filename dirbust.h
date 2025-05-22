@@ -4,19 +4,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-<<<<<<< HEAD
-#include "libs/universal/tinycthreads/tinycthread.h"
-#include "libs/windows/curl-8.13.0_5-win64-mingw/include/curl/curl.h"
-#include <string.h>
-#include <ctype.h>
-=======
 #include "libs/tinycthreads.h"
-#include <curl/curl.h>
+#include "libs/windows/curl-8.13.0_5-win64-mingw/include/curl/curl.h"
+#include <ctypes.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
 
->>>>>>> ebdc565df8ad9407debbf2991391433dc5209a64
 
 #define MAX_LINE 1024
 #define MAX_THREADS 10
