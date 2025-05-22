@@ -5,12 +5,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "libs/tinycthreads.h"
-#include "libs/windows/curl-8.13.0_5-win64-mingw/include/curl/curl.h"
 #include <ctype.h>
 #include <string.h>
 #include <unistd.h>
+#ifdef _WIN32
+#include <direct.h>
+#define MKDIR(path) _mkdr(path)
+#include "libs/windows/curl-8.13.0_5-win64-mingw/include/curl/curl.h"
+#else
 #include <sys/stat.h>
-
+#define MKDIR(path) mkdir(path, 0755)
+#include <curl/curl.h>
+#endif
 
 #define MAX_LINE 1024
 #define MAX_THREADS 10

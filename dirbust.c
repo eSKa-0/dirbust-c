@@ -49,7 +49,7 @@ void create_directories(const char *path) {
 	for (char *p = tmp + strlen("output") + 1; *p; p++) {
 		if (*p == '/') {
 			*p = 0;
-			mkdir(tmp, 0755);
+			MKDIR(tmp);
 			*p = '/';
 		}
 	}
