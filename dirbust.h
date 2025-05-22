@@ -10,7 +10,7 @@
 #include <unistd.h>
 #ifdef _WIN32
 #include <direct.h>
-#define MKDIR(path) _mkdr(path)
+#define MKDIR(path) _mkdir(path)
 #include "libs/windows/curl-8.13.0_5-win64-mingw/include/curl/curl.h"
 #else
 #include <sys/stat.h>
