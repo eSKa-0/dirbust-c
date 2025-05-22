@@ -1,15 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <threads.h>
-#include <curl/curl.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
+#include "libs/universal/tinycthreads/tinycthread.h"
+#include "libs/windows/curl-8.13.0_5-win64-mingw/include/curl/curl.h"
 #include <string.h>
 #include <ctype.h>
-#include <regex.h>
-#include <libgen.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
 #define MAX_LINE 1024
 #define MAX_THREADS 10

@@ -1,2 +1,2 @@
 all:
-	gcc dirbust.c -lcurl -o dirbust
+	gcc dirbust.c -llibs/windows/curl-8.13.0_5-win64-mingw -o dirbust
