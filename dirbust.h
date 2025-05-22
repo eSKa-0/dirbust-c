@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include "libs/tinycthreads.h"
 #include "libs/windows/curl-8.13.0_5-win64-mingw/include/curl/curl.h"
-#include <ctypes.h>
+#include <ctype.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
